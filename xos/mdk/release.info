@@ -1,0 +1,122 @@
+{
+	"socPlatforms":[
+		{
+			"id":"myriad",
+			"active":"true",
+			"description":"Myriad soc platform",
+			"location":"${MV_COMMON_BASE}/drivers/myriad",
+ 			"socRevisions":[
+ 				{
+ 					"id":"ma2150",
+					"description":"ma2150 soc revision"
+				},
+				{
+					"id":"ma2450",
+ 					"active":"true",
+					"description":"ma2450 soc revision"
+ 				},
+				{
+					"id":"ma2480",
+					"description":"ma2480 soc revision"
+ 				}
+ 			]
+		}
+	],
+	"projectTypes":[
+		{
+			"id":"bare_metal",
+			"name":"Bare Metal",
+			"description":"Project running on bare metal",
+			"debug_stop_symbol":"main"
+		},
+		{
+			"id":"rtems",
+			"name":"RTEMS Based",
+			"description":"Project running on RTEMS",
+			"debug_stop_symbol":"POSIX_Init"
+		},
+		{
+			"id":"sipp",
+			"name":"Pipeline Image Processing",
+			"description":"Project running on streaming image processing pipeline",
+			"debug_stop_symbol":"main"
+		}
+	],
+	"projectVariants":[
+		{
+			"id":"template",
+			"name":"Templates",
+			"description":"Template Myriad project",
+			"location":"examples/Templates"
+		},
+		{
+			"id":"demo",
+			"name":"Demonstratives",
+			"description":"Demonstrative Myriad project",
+			"location":"examples/Demo"
+		},
+		{
+			"id":"howto",
+			"name":"Tutorials",
+			"description":"Tutorial Myriad project",
+			"location":"examples/HowTo"
+		},
+		{
+			"id":"progressive",
+			"name":"Progressives",
+			"description":"Progressive Myriad project",
+			"location":"examples/Progressive"
+		},
+		{
+			"id":"sipp",
+			"name":"Pipe Processing",
+			"description":"Image processing Myriad project",
+			"location":"examples/Sipp"
+		},
+		{
+			"id":"other",
+			"name":"Other",
+			"description":"Other examples",
+			"location":"examples"
+		}		
+	],
+	"buildPaths":[
+		{
+			"id":"SIPP_PATH",
+			"description":"Relative location to the sipp root path",
+			"value":"components/sipp"
+		}
+	],
+	"buildMacros":[
+		{
+			"id":"MV_COMMON_BASE",
+			"description":"MDK common folder location"
+		},
+		{
+			"id":"MV_TOOLS_DIR",
+			"description":"Tools folder location"
+		},
+		{
+			"id":"MV_TOOLS_VERSION",
+			"description":"Tools folder location"
+		},
+		{
+			"id":"MV_SOC_PLATFORM",
+			"description":"The system on the chip"
+		},
+		{
+			"id":"MV_SOC_REV",
+			"description":"The system on the chip revision"
+		},
+		{
+			"id":"MV_SOC_OS",
+			"description":"The operating system RTEMS"
+		}
+	],
+	"profilers":[
+		"common/components/profiler/functionProfiler.json",
+		"common/components/profiler/sampleProfiler.json",
+		"common/components/profiler/traceProfiler.json"
+	],
+	"profilersGlobalConfig" : "common/components/profiler/global.json"
+}

@@ -1,0 +1,83 @@
+{
+"documentation":
+	{
+	"docList":
+	      [	    
+		  {
+		    "path":"doc/ReleaseNotes.pdf",
+		    "name":"Release Notes",
+		    "description":"Movidius Release Notes"
+		  },
+		  
+		  {
+		    "path":"doc/moviToolsIntroduction.pdf",
+		    "name":"moviToolsIntroduction",
+		    "description":"Movidius Tools Introduction"
+		  },
+		  
+		  {
+		    "path":"doc/moviAsm.pdf",
+		    "name":"moviAsm",
+		    "description":"Movidius Assembler User Manual"
+		  },
+		  
+		  {
+		    "path":"doc/moviCompile.pdf",
+		    "name":"moviCompile",
+		    "description":"Movidius Compiler User Manual"
+		  },
+		  
+		  {
+		    "path":"doc/Reducing Tests for Compiler Bug Reports.pdf",
+		    "name":"Reducing Tests for moviCompiler Bug Reports",
+		    "description":"Movidius Reducing Tests for moviCompiler Bug Reports"
+		  },
+		  
+		  {
+		    "path":"doc/moviConvert.pdf",
+		    "name":"moviConvert",
+		    "description":"Movidius Object Format User Manual"
+		  },
+		  
+		  {
+		    "path":"doc/moviDebug2.pdf",
+		    "name":"moviDebug2",
+		    "description":"Movidius Debugger2 User Manual"
+		  },
+		  {
+		    "path":"doc/moviDebug2 features.pdf",
+		    "name":"moviDebug2 CLI features",
+		    "description":"Movidius Debugger2 - Command Line Interface Features (Slideshow)"
+		  },
+		  {
+		    "path":"doc/moviDebugServer.pdf",
+		    "name":"moviDebugServer",
+		    "description":"Movidius Debug Server User Manual"
+		  },
+		  
+		  {
+		    "path":"doc/moviDump.pdf",
+		    "name":"moviDump",
+		    "description":"Movidius Object Dumper User Manual"
+		  },
+		  
+		  {
+		    "path":"doc/moviProf.pdf",
+		    "name":"moviProf",
+		    "description":"Movidius Profiler User Manual"
+		  },
+		  
+		  {
+		    "path":"doc/moviSim.pdf",
+		    "name":"moviSim",
+		    "description":"Movidius Simulator User Manual"
+		  }
+	      ]
+	},	
+    "profilers":[
+		"common/moviProf/functionProfiler.json",
+		"common/moviProf/sampleProfiler.json",
+		"common/moviProf/traceProfiler.json"
+	],
+	"profilersGlobalConfig" : "common/moviProf/global.json"
+ }
