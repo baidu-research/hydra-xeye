@@ -1,0 +1,3 @@
+source "/home/haofeng/projects/sunny/farmland/xcore/flic_starter_app/flic_starter/kcnf"
+source "/home/haofeng/projects/sunny/farmland/xos/mdk/common/kcnf"
+source "../../../xos/mdk/common/kcnf-myriad-proj"

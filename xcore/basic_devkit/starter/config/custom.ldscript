@@ -1,0 +1,115 @@
+/*  This is a Default memory map configuration
+ *
+ *  Should be used as an included linker script in top level scripts
+ *
+ *  Addresses defined in common/drivers/myriad2/system/asm/memmap.S
+ */
+
+EXTERN(rtems_get_version_string);
+
+VERSION_INFO_DYNAMIC_SIZE = DEFINED (VERSION_INFO_DYNAMIC_SIZE) ? VERSION_INFO_DYNAMIC_SIZE : 1024;
+DTP_DATA_SIZE = DEFINED (DTP_DATA_SIZE) ? DTP_DATA_SIZE : (1024 * 500);
+
+
+MEMORY
+{
+  SHV0_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K,       LENGTH = 8K
+  SHV0_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 8K,  LENGTH = 120K
+
+  SHV1_CODE (wx)  : ORIGIN = 0x70000000 + 1 * 128K,       LENGTH = 8K
+  SHV1_DATA (w)   : ORIGIN = 0x70000000 + 1 * 128K + 8K,  LENGTH = 120K
+
+  SHV2_CODE (wx)  : ORIGIN = 0x70000000 + 2 * 128K,       LENGTH = 8K
+  SHV2_DATA (w)   : ORIGIN = 0x70000000 + 2 * 128K + 8K,  LENGTH = 120K
+
+  SHV3_CODE (wx)  : ORIGIN = 0x70000000 + 3 * 128K,       LENGTH = 8K
+  SHV3_DATA (w)   : ORIGIN = 0x70000000 + 3 * 128K + 8K,  LENGTH = 120K
+
+  SHV4_CODE (wx)  : ORIGIN = 0x70000000 + 4 * 128K,       LENGTH = 8K
+  SHV4_DATA (w)   : ORIGIN = 0x70000000 + 4 * 128K + 8K,  LENGTH = 120K
+
+  SHV5_CODE (wx)  : ORIGIN = 0x70000000 + 5 * 128K,       LENGTH = 8K
+  SHV5_DATA (w)   : ORIGIN = 0x70000000 + 5 * 128K + 8K,  LENGTH = 120K
+
+  SHV6_CODE (wx)  : ORIGIN = 0x70000000 + 6 * 128K,       LENGTH = 8K
+  SHV6_DATA (w)   : ORIGIN = 0x70000000 + 6 * 128K + 8K,  LENGTH = 120K
+
+  SHV7_CODE (wx)  : ORIGIN = 0x70000000 + 7 * 128K,       LENGTH = 8K
+  SHV7_DATA (w)   : ORIGIN = 0x70000000 + 7 * 128K + 8K,  LENGTH = 120K
+
+  SHV8_CODE (wx)  : ORIGIN = 0x70000000 + 8 * 128K,       LENGTH = 8K
+  SHV8_DATA (w)   : ORIGIN = 0x70000000 + 8 * 128K + 8K,  LENGTH = 120K
+
+  SHV9_CODE (wx)  : ORIGIN = 0x70000000 + 9 * 128K,       LENGTH = 0K
+  SHV9_DATA (w)   : ORIGIN = 0x70000000 + 9 * 128K + 0K,  LENGTH = 0K
+
+  SHV10_CODE (wx) : ORIGIN = 0x70000000 + 10 * 128K,       LENGTH = 0K
+  SHV10_DATA (w)  : ORIGIN = 0x70000000 + 10 * 128K + 0K,  LENGTH = 0K
+
+  SHV11_CODE (wx) : ORIGIN = 0x70000000 + 11 * 128K,       LENGTH = 0K
+  SHV11_DATA (w)  : ORIGIN = 0x70000000 + 11 * 128K + 0K,  LENGTH = 0K
+
+  SHV12_CODE (wx) : ORIGIN = 0x70000000 + 12 * 128K,       LENGTH = 0K
+  SHV12_DATA (w)  : ORIGIN = 0x70000000 + 12 * 128K + 0K,  LENGTH = 0K
+
+  SHV13_CODE (wx) : ORIGIN = 0x70000000 + 13 * 128K,       LENGTH = 0K
+  SHV13_DATA (w)  : ORIGIN = 0x70000000 + 13 * 128K + 0K,  LENGTH = 0K
+
+  SHV14_CODE (wx) : ORIGIN = 0x70000000 + 14 * 128K,       LENGTH = 0K
+  SHV14_DATA (w)  : ORIGIN = 0x70000000 + 14 * 128K + 0K,  LENGTH = 0K
+
+  SHV15_CODE (wx) : ORIGIN = 0x70000000 + 15 * 128K,       LENGTH = 0K
+  SHV15_DATA (w)  : ORIGIN = 0x70000000 + 15 * 128K + 0K,  LENGTH = 0K
+
+  /* The CMX_DMA section must be between the following addreses
+   *  0x78000000 + 16 * 128K
+   *      and
+   *  0x78000000 + 17 * 128K  */
+
+  /* make sure cmx_other is in slice15 if leons use data stored here */
+  CMX_DMA_DESCRIPTORS  (wx) : ORIGIN = 0x78000000 + 18*128K + 0K, LENGTH = 40K
+  CMX_OTHER            (wx) : ORIGIN = 0x70000000 + 18*128K + 40K, LENGTH = 256K-40K
+
+  LOS                  (wx) : ORIGIN = 0x80000000 + 0, LENGTH = 64M
+  LRT                  (wx) : ORIGIN = 0x80000000 + 64M,     LENGTH = 16M
+  GUZZI_MEM            (wx) : ORIGIN = 0x80000000 + 64M+16M, LENGTH = 2M
+  DDR_DATA             (wx) : ORIGIN = 0x80000000 + 64M+16M+2M, LENGTH = 512M-64M-16M-2M
+
+}
+
+SECTIONS
+{
+  .ddr.xxdebug :
+  {
+    __start_mmsdbgvarlist = .;
+    KEEP(*(mmsdbgvarlist))
+    __stop_mmsdbgvarlist = .;
+  } > GUZZI_MEM
+
+  version_info :
+  {
+    . = ALIGN (16);
+    linker_version_info_begin = .;
+
+    KEEP(*(version_info_prolog))
+    KEEP(*(version_info))
+    KEEP(*(version_info_epilog))
+    . = ALIGN (4);
+    . += VERSION_INFO_DYNAMIC_SIZE;
+    linker_version_info_end = .;
+  } > GUZZI_MEM
+
+  dtp_data :
+  {
+    . = ALIGN (16);
+    linker_dtp_data_begin = .;
+    *(dtp_data*)
+    . = linker_dtp_data_begin + DTP_DATA_SIZE;
+    linker_dtp_data_end = .;
+  } > GUZZI_MEM
+}
+
+INCLUDE output/shvDynInfrastructureBase.ldscript
+INCLUDE myriad2_leon_default_elf.ldscript
+INCLUDE myriad2_shave_slices.ldscript
+INCLUDE myriad2_SDL_general_purpose_sections.ldscript

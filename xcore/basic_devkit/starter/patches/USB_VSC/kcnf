@@ -1,0 +1,9 @@
+config USE_COMPONENT_USB_VSC
+  bool "Use mdk component USB_VSC"
+  default n
+  select USE_PACKAGE_USB_PROTOVSC2
+  select USE_PACKAGE_USB_PROTOWMC
+  select USE_PACKAGE_USB_OSRTEMS
+  select USE_PACKAGE_USB_XDCI
+help
+    Check this if you want to compile the USB_VSC mdk component into your application

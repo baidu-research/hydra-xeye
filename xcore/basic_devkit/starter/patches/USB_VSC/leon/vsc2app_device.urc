@@ -1,0 +1,131 @@
+##############################################################################
+#
+# Module:  vscapp_device.urc
+#
+# Function:
+# The USB resource file to configure pintabian USB device for use
+# as vendor specific class protocol.
+#
+# Version:
+# V3.13b  Fri Sep 05 2014 16:30:47 chwon  Edit level 2
+#
+# Copyright notice:
+# This file copyright (C) 2013-2014 by
+#
+#   MCCI Corporation
+#   3520 Krums Corners Road
+#   Ithaca, NY  14850
+#
+# An unpublished work.  All rights reserved.
+#
+# This file is proprietary information, and may not be disclosed or
+# copied without the prior permission of MCCI Corporation
+#
+# Author:
+# ChaeHee Won, MCCI Corporation December 2013
+#
+# Revision History:
+#   3.11d  Wed Dec 18 2013 11:04:00  chwon
+# 17881: Module created.
+#
+#   3.13b  Fri Sep 05 2014 16:30:47  chwon
+# 18507: Use USB-resource-file 3.00 to support USB 3.
+#
+##############################################################################
+
+USB-resource-file 3.00 =
+  {
+  Device  {
+    Class   0x00  # Device: use class information in the
+    SubClass  0x00  #   interface descriptors.
+    Protocol  0x00  #
+
+    Vendor    0x040E  %tag% S_VENDOR_ID
+    Product-ID  0xF63B  %tag% S_PRODUCT
+
+    Device-Version  1.0
+    serial-number S_SERIALNUMBER
+    } %no external name% ;
+
+  #########################################
+  #### here's the first configuration. ####
+  #########################################
+
+  Configuration 1
+    {
+    # %tag% S_CONFIG_ID   % name of this configuration %
+    %Bus-Powered% Self-Powered  %the flags%
+    Power 5 mA
+    % private descriptors would go here %
+
+    #########################################
+    # Vendor specific interface #
+    #########################################
+    interface 0
+      {
+      alternate-setting 0
+        class  0xFF # vendor specific class
+        subclass 0x00 #
+        protocol 0x00 #
+        name S_BULKDATA # string
+        endpoints
+          bulk out 1
+          bulk in  1
+          bulk out 2
+          bulk in  2
+          bulk out 3
+          bulk in  3
+        ;
+      }
+
+    } %end of configuration% ;
+
+  strings
+    {
+    properties external read-only S_SERIALNUMBER;
+
+    default, language "English (USA)"
+      {
+      S_VENDOR_ID = "MCCI Corporation";
+      S_PRODUCT = "VSC Loopback Device";
+      S_SERIALNUMBER = "DUMMY";
+
+      S_BULKDATA = "Bulk Data";
+      }
+    } %strings% ;
+  } %no name% ;
+
+#### the stuff we need to generate the external string info ####
+application
+        {
+  structure
+    {
+    type name "UDEVICE_VSCAPP";
+    };
+  initialization
+    {
+    function name "usbrc_UdeviceVscApp_Init";
+    file name "vsc2app_device.c";
+    };
+  header-file
+    {
+    file name "vsc2app_device.h";
+    with string ids;
+    };
+        descriptor table
+                {
+    internal names static;
+                functions
+                       {
+                       get-descriptor "UsbPumpFilter_MultiConfigModalDescriptors";
+                       };
+               };
+  strings
+    {
+    prefix "VSCAPP";
+    };
+        };
+
+% end of file %
+
+#### end of vscapp_device.urc ####

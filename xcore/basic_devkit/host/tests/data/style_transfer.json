@@ -1,0 +1,21 @@
+{
+    "enable_preprocess" : 1,
+    "preprocess" : {
+        "enable_resize" :  1,
+        "resize" : {
+            "height" : 256,
+            "width" : 256
+        },
+        "enable_mean" :  1,
+        "mean" : {
+            "b" : 103.939,
+            "g" : 116.779,
+            "r" : 123.68
+        },
+        "enable_scale" :  0,
+        "scale" : 0.0
+    },
+    "result" : {
+        "with_original_image" : 0
+    }
+}
