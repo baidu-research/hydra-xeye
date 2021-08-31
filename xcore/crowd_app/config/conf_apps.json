@@ -1,0 +1,51 @@
+{
+	"xeye_id":	"xeye_2",
+	"confidence":	16,
+	"sensor_ccm_index":	0,
+	"running_mode":	{
+		"comment":	"running mode, can only be configured as record, normal, live mode",
+		"mode":	"normal"
+	},
+	"online_grab":	{
+		"enable":	false,
+		"strategy":	"interval",
+		"value":	512
+	},
+	"online_update":	{
+		"host":	"",
+		"url_prefix":	""
+	},
+	"data_server":	{
+		"comment":	"the IP address and port of server which xeye send data to",
+		"addr":	"192.168.1.1",
+		"port":	8001,
+		"url":	"/api/v1/postHumanEvent"
+	},
+	"ntp_server":	{
+		"comment":	"the IP address and port of NTP time syncronization server",
+		"addr":	"192.168.1.1",
+		"port":	123
+	},
+	"heartbeat_server":	{
+		"comment":	"the IP address and port of heartbeat server",
+		"addr":	"192.168.1.1",
+		"port":	1988,
+		"url":	"/sync/v1/push"
+	},
+	"playback_server":	{
+		"comment":	"the IP address and port of playback server, if addr section is empty, then playback mode is disabled",
+		"addr":	"192.168.1.1",
+		"port":	6666
+	},
+	"local_network_info":	{
+		"comment":	"static ip address, netmask and gateway configuration",
+		"ip_address":	"192.168.1.102",
+		"net_mask":	"255.255.0.0",
+		"gate_way":	""
+	},
+	"models":	[{
+			"comment":	"model_name: the name of the model, model_path: the abs path of the model file",
+			"model_name":	"detect",
+			"model_path":	"/mnt/sdcard/graphs/"
+		}]
+}
